@@ -2,7 +2,7 @@ module.exports.config = {
 	name: "joinnoti",
 	eventType: ["log:subscribe"],
 	version: "1.0.1",
-	credits: "Mirai Team",
+	credits: "Mirai Team", // Mod by Xám
 	description: "Thông báo bot hoặc người vào nhóm + shareContact",
 	dependencies: {
 		"fs-extra": "",
@@ -35,11 +35,11 @@ module.exports.run = async function({ api, event, Users  , Threads}) {
   if (typeof thread["joinNoti"] != "undefined" && thread["joinNoti"] == false) return;
   ///////////////////////////////////////////////////////
 	if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
-		api.changeNickname(`[ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "Made by Khôi" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
+		api.changeNickname(`[ ${global.config.PREFIX} ] ${(!global.config.BOTNAME) ? "Made by Khôi" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
 		const fs = require("fs");
-    var mlg="Kết nối thành công\nĐã load toàn bộ lệnh và người dùng trong nhóm.\n❌ Nếu nhóm của bạn chưa kích hoạt sử dụng bot, vui lòng sử dụng lệnh 'callad' để liên hệ Admin.\n─────────────────\n🌐 Facebook: https://www.facebook.com/100018277053087"
+    var mlg="Kết nối thành công\nNhóm của bạn chưa thuê bot hãy liên hệ admin để thuê sử dụng\n─────────────────\n🌐 Facebook: https://www.facebook.com/100083411540341"
     	return api.sendMessage(threadID,async () => {
-await api.shareContact(`${mlg}`, 100018277053087, threadID);
+await api.shareContact(`${mlg}`, 100083411540341, threadID);
 });
 
 	}
@@ -95,7 +95,7 @@ await api.shareContact(`${mlg}`, 100018277053087, threadID);
 			}
 			memLength.sort((a, b) => a - b);
 			
-			(typeof threadData.customJoin == "undefined") ? msg = "‎[ Thành Viên Vào Nhóm ]\n─────────────────\n🎀Chào mừng {name} đã đến với box {threadName}.\n👤{type} là thành viên thứ {soThanhVien} của nhóm\n🎀 {type} được thêm bởi: {author}\n⏰ Thời gian:{time}\n📆 Vào buổi {session} {thu}" : msg = threadData.customJoin;
+			(typeof threadData.customJoin == "undefined") ? msg = "‎[ Thành Viên Vào Nhóm ]\n─────────────────\n🎀 Chào mừng thành viên mới của nhóm!\n{type} được thêm bởi: {author}\n─────────────────\n⏰ Thời gian:{time}\n📆 Vào buổi {session} {thu}" : msg = threadData.customJoin;
       var getData = await Users.getData(event.author)
 var nameAuthor = typeof getData.name == "undefined" ? "Người dùng tự vào" : getData.name
 			msg = msg
